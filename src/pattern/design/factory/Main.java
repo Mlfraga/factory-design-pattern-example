@@ -1,7 +1,6 @@
 package pattern.design.factory;
-
-import pattern.design.factory.calculation.CalculationFactory;
-import pattern.design.factory.calculation.CalculationType;
+import pattern.design.factory.car.CarType;
+import pattern.design.factory.car.CarsFactory;
 
 import java.util.Scanner;
 
@@ -9,17 +8,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Digite o nome do produto: ");
-        String name = input.nextLine();
+        System.out.print("Digite o respectivo número da fabricante do carro <1 - Ferrari || 2 - Porsche>: ");
+        int manufacturerOption = input.nextInt();
 
-        System.out.print("Digite o preço do produto: ");
-        double price = input.nextDouble();
+        CarType manufacturer;
 
-        CalculationType calculationType = CalculationType.FIFTY_PERCENT_DISCOUNT;
+        if(manufacturerOption == 1){
+            manufacturer = CarType.FERRARI;
+        }else{
+            manufacturer = CarType.PORSCHE;
+        }
 
-        Product newProduct = new Product(name, price, CalculationFactory.getCalculation(calculationType));
+        var car1 = CarsFactory.getCar(manufacturer);
 
-        System.out.println(newProduct);
-        System.out.printf("\nPreço final do produto: %s%n", newProduct.calculateFinalPrice());
+        System.out.println(car1.getDescription());
     }
 }
